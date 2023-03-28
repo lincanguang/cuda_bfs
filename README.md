@@ -8,4 +8,6 @@ For CPU bfs, the main cost is the push_back operation for std::vector. therefore
 
 For GPU bfs, the tech detail is descripted in a Nvidia paper : https://research.nvidia.com/publication/scalable-gpu-graph-traversal (Merrill, Garland, Grimshaw). An impletation of scan bfs (Expande-Contract) has finished in folder cuda_bfs/bfs_cuda/src/gpu/scan. 
 
-there is still something wrong with the bfs scan version when load a large graph.
+For a small graph (data/4elt.graph, with 15606 vertices), the scan algorithm with prefix sum passed the test.
+when N_THREADS_PER_BLOCK == 256 (see src\gpu\param.h), the algorithm performed best.
+But there is still something wrong with the bfs scan version when load a large graph(data/citationCiteseer.graph, with 268494 vertices).

@@ -54,10 +54,6 @@ public:
 			int depth = graph_output.second;
 			printf("CHECKED SUCCESSFULY! Number of visited vertices: %i, depth: %i \n", n_visited_vertices, depth);
 		}
-
-			
-			
-	
 	}
 };
 
@@ -79,7 +75,7 @@ int main() {  // TODO: Add arguments to main program (type of graph, file path)
 	bfsCPU(startVertex, G, distance, visited);
 	auto endTime = chrono::steady_clock::now();
 	long duration = chrono::duration_cast<chrono::microseconds>(endTime - startTime).count();
-	printf("Elapsed time for CPU implementation : %li micro second.\n", duration);
+	printf("Elapsed time for CPU implementation : %li micro second.\n\n", duration);
 	Checker checker(distance);
 
 	// mybfsCPU
@@ -88,7 +84,7 @@ int main() {  // TODO: Add arguments to main program (type of graph, file path)
 	mybfsCPU(startVertex, G, distance, visited);
 	endTime = chrono::steady_clock::now();
 	duration = chrono::duration_cast<chrono::microseconds>(endTime - startTime).count();
-	printf("Elapsed time for my CPU implementation : %li micro second.\n", duration);
+	printf("Elapsed time for my CPU implementation : %li micro second.\n\n", duration);
 
 	
 
@@ -99,21 +95,19 @@ int main() {  // TODO: Add arguments to main program (type of graph, file path)
 	bfsGPU(startVertex, G, distance, visited);
 	endTime = std::chrono::steady_clock::now();
 	duration = chrono::duration_cast<chrono::microseconds>(endTime - startTime).count();
-	printf("Elapsed time for naive linear GPU implementation (with graph copying) : %li micro second.\n", duration);
+	printf("Elapsed time for naive linear GPU implementation (with graph copying) : %li micro second.\n\n", duration);
 	
 	checker.check(distance);
 
-	// my GPU, test the cost between cudaMalloc and cudaMallocHost
-	/*
+	// my linear GPU with duplicate vertices dropped.
 	distance = vector<int>(G.numVertices);
 	startTime = chrono::steady_clock::now();
 	mybfsGPU(startVertex, G, distance, visited);
 	endTime = std::chrono::steady_clock::now();
 	duration = chrono::duration_cast<chrono::microseconds>(endTime - startTime).count();
-	printf("Elapsed time for my GPU implementation (with graph copying) : %li micro second.\n", duration);
+	printf("Elapsed time for my linear GPU implementation (with graph copying) : %li micro second.\n\n", duration);
 
 	checker.check(distance);
-	*/
 
 	// Quadratic GPU
 
@@ -122,7 +116,7 @@ int main() {  // TODO: Add arguments to main program (type of graph, file path)
 	bfsGPUQuadratic(startVertex, G, distance, visited);
 	endTime = std::chrono::steady_clock::now();
 	duration = chrono::duration_cast<chrono::microseconds>(endTime - startTime).count();
-	printf("Elapsed time for quadratic GPU implementation (with graph copying) : %li micro second.\n", duration);
+	printf("Elapsed time for quadratic GPU implementation (with graph copying) : %li micro second.\n\n", duration);
 
 	checker.check(distance);
 
@@ -133,7 +127,7 @@ int main() {  // TODO: Add arguments to main program (type of graph, file path)
 	bfsGPUScan(startVertex, G, distance, visited);
 	endTime = std::chrono::steady_clock::now();
 	duration = chrono::duration_cast<chrono::microseconds>(endTime - startTime).count();
-	printf("Elapsed time for scan GPU implementation (with graph copying) : %li micro second.\n", duration);
+	printf("Elapsed time for scan GPU implementation (with graph copying) : %li micro second.\n\n", duration);
 
 	checker.check(distance);
 
